@@ -83,7 +83,6 @@ class AdminCategoriesController extends Controller
        session()->flash('success','Category Updated Successful');
        return redirect()->back();
    }
-
    public function category_delete(Request $request,$id)
    {
        $category=Category::find($id);

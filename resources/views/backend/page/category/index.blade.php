@@ -5,7 +5,7 @@
 
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Categories View</h1>
-
+    @include('backend.partials._message')
     <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -24,25 +24,33 @@
                         </tr>
                         </thead>
                         <tbody>
-
+                       @foreach($categories as $category)
                             <tr>
-                                <td>1</td>
-                                <td>Audio</td>
-                                <td>Electronic Devices</td>
-                                <td>Image</td>
+                                <td>{{$category->id}}</td>
+                                <td>{{$category->name}}</td>
                                 <td>
-                                    <a href="#" class="btn btn-success btn-icon-split">
-
+                                    @if($category->parent_id==null)
+                                        Parent_Category
+                                    @else
+                                    {{$category->parent['name']}}
+                                     @endif
+                                </td>
+                                <td>
+                                    <img src="{{asset('images/category/'.$category->image)}}"alt=""width="80px">
+                                </td>
+                                <td>
+                                    <a href="{{url('/admin/category/edit/'.$category->id)}}" class="btn btn-success btn-icon-split">
                                         <span class="text">Edit</span>
                                     </a>
-                                    <a href="#" class="btn btn-danger btn-icon-split">
-
-                                        <span class="text">Delete</span>
-                                    </a>
+                                    <form action="{!! route('admin.category.delete',$category->id) !!}"
+                                          method="post">
+                                        {{csrf_field()}}
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
                                 </td>
 
                             </tr>
-
+                       @endforeach
                         </tbody>
                     </table>
                 </div>

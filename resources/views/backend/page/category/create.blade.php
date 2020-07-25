@@ -5,7 +5,7 @@
 
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Add Category</h1>
-{{--        @include('backend.partials._message')--}}
+        @include('backend.partials._message')
         <form action="{{route('admin.categories.store')}}" method="post" class="form form-horizontal w-75" enctype="multipart/form-data">
             {{csrf_field()}}
             <div class="form-group">
